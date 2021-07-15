@@ -1,0 +1,233 @@
+ <!DOCTYPE html>
+<html style="line-height:0">
+
+<head>
+<title>Quiz</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<div>
+  <h1 id='pitanje' style="font-size: 48px; text-align: center;"></h3>
+  <p style="font-size: 16px; text-align: center;">izaberi 1 odgovor</p>
+  <hr />
+
+  <div id='block-11' style='padding: 10px;' onclick="selectOption(1)">
+    <label for='option-11' style=' padding: 5px; font-size: 24px;'>
+      <input type='radio' name='option' value='1' id='option-11' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
+	  	  <label id='label1'/>
+</label>
+    <span id='result-11'></span>
+  </div>
+  <hr />
+
+  <div id='block-12' style='padding: 10px;' onclick="selectOption(2)">
+    <label for='option-12' style=' padding: 5px; font-size: 24px;'>
+      <input type='radio' name='option' value='2' id='option-12' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
+	  	  <label id='label2'/>
+</label>
+    <span id='result-12'></span>
+  </div>
+  <hr />
+
+  <div id='block-13' style='padding: 10px;' onclick="selectOption(3)">
+    <label for='option-13' style=' padding: 5px; font-size: 24px;'>
+      <input type='radio' name='option' value='3' id='option-13' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
+	  	  <label id='label3'/>
+      </label>
+    <span id='result-13'></span>
+  </div>
+  <hr />
+
+  <div id='block-14' style='padding: 10px;' onclick="selectOption(4)">
+    <label for='option-14' style=' padding: 5px; font-size: 24px;'>
+      <input type='radio' name='option' value='4' id='option-14' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
+	  <label id='label4'/>
+      </label>
+    <span id='result-14'></span>
+  </div>
+  <hr />
+  
+  <div style="display: flex; justify-content: space-around;">
+  <button type='button' onclick='onLoad()' style='width: 100px; height: 40px; border-radius: 3px; background-color: darkred; font-weight: 700; color: white'>Sljedece</button>
+  
+    <button type='button' onclick='displayAnswer1()' style='width: 150px; height: 80px; border-radius: 3px; background-color: darkgreen; font-weight: 700; color: white'>Potvrdi</button>
+
+  </div>
+</div>
+<a id='showanswer1'></a>
+<script>
+
+	let data =	'[' +
+				'{ "ime":"Bananen lose" , "broj":"1" }' +
+				',{ "ime":"Apfel lose (rot)" , "broj":"2" }' +
+				',{ "ime":"Sellerie lose" , "broj":"4" }' +
+				',{ "ime":"Bio Ingwer lose" , "broj":"11" }' +
+
+				',{ "ime":"Birne Abate Premium" , "broj":"18" }' +
+				',{ "ime":"Apfel lose (grün)" , "broj":"21" }' +
+				',{ "ime":"Tomaten Rispen lose" , "broj":"27" }' +
+				',{ "ime":"Weißkohl lose" , "broj":"28" }' +
+
+				',{ "ime":"Bananen Chiquita" , "broj":"30" }' +
+				',{ "ime":"Apfel Pink Lady lose" , "broj":"32" }' +
+				',{ "ime":"Erdbeeren lose" , "broj":"42" }' +
+				',{ "ime":"Paprika rot lose" , "broj":"44" }' +
+
+				',{ "ime":"Aprikosen lose" , "broj":"47" }' +
+				',{ "ime":"Wassermelonen lose" , "broj":"50" }' +
+				',{ "ime":"Nektarinen Gelbfl. lose" , "broj":"52" }' +
+				',{ "ime":"Kirschen lose" , "broj":"67" }' +
+
+				',{ "ime":"Birne rot lose" , "broj":"80" }' +
+				',{ "ime":"Trauben hell kernlos lose" , "broj":"81" }' +
+				',{ "ime":"Zucchini lose" , "broj":"84" }' +
+				',{ "ime":"Grapefruit rose Stück" , "broj":"548" }' +
+
+				',{ "ime":"Lauch/Porree Stück" , "broj":"620" }' +
+				',{ "ime":"Avocado vorgereift" , "broj":"642" }' +
+				',{ "ime":"Kiwi Stück" , "broj":"644" }' +
+				',{ "ime":"Mango" , "broj":"646" }' +
+
+
+				',{ "ime":"Salat Kopfsalat" , "broj":"666" }' +
+				',{ "ime":"Gurken" , "broj":"683" }' +
+				',{ "ime":"Kohlrabi" , "broj":"725" }' +
+				',{ "ime":"Kartoffeln 4 kg" , "broj":"739" }' +
+				',{ "ime":"Lauchzwiebel" , "broj":"745" }' +
+				',{ "ime":"Radieschen" , "broj":"751" }' +	
+
+				',{ "ime":"Aubergine" , "broj":"852" }' +
+				',{ "ime":"Blumenkohl" , "broj":"883" }' +
+				',{ "ime":"Träger leer ganzer Kasten" , "broj":"2902" }' +
+				',{ "ime":"Baumwolltragetasche" , "broj":"7387" }' +
+				
+				']';
+				
+	var correct = 0;
+	var arr = [];					
+	let jsonData = JSON.parse(data);
+
+	onLoad();
+				
+	function onLoad() {
+			
+				resetElements();
+
+				correct = 0;
+				arr = [];	
+																
+			do {
+			var numm = Math.floor(Math.random() * Object.keys(jsonData).length);
+			  if(!arr.includes(numm)){
+				arr.push(numm);
+							  }
+			}
+			while (arr.length < 4); 
+			
+			correct = arr[Math.floor(Math.random() * arr.length)];
+			
+//console.log(correct);
+//console.log(arr);
+//console.log(jsonData);
+					
+			var property = Math.floor(Math.random() * 2) + 1; 
+			
+			
+			//ime
+			if(property == 1){
+			
+			document.getElementById('pitanje').innerHTML = jsonData[correct].ime;
+			
+			document.getElementById('label1').innerText = jsonData[arr[0]].broj;
+			document.getElementById('label2').innerText = jsonData[arr[1]].broj;
+			document.getElementById('label3').innerText = jsonData[arr[2]].broj;
+			document.getElementById('label4').innerText = jsonData[arr[3]].broj;
+			
+			
+			
+			}//broj
+			else if(property == 2){
+			
+			document.getElementById('pitanje').innerHTML = jsonData[correct].broj;
+			
+			document.getElementById('label1').innerText = jsonData[arr[0]].ime;
+			document.getElementById('label2').innerText = jsonData[arr[1]].ime;
+			document.getElementById('label3').innerText = jsonData[arr[2]].ime;
+			document.getElementById('label4').innerText = jsonData[arr[3]].ime;
+			
+	
+			
+			};
+			
+						
+	}
+				
+
+	function selectOption(index){
+	
+	
+	 for (let i = 1; i < 5; i++) { 
+				document.getElementById('option-1'+i.toString()).checked = (i == index);
+};
+	
+	
+	}
+				
+  //    The function evaluates the answer and displays result
+  function displayAnswer1() {
+	
+	resetElements();
+	
+	var checked = '';
+	var index = 0;
+	
+	if (document.getElementById('option-11').checked) {
+      checked = document.getElementById('label1').innerText;
+	  index = 1;
+    }
+    if (document.getElementById('option-12').checked) {
+      checked = document.getElementById('label2').innerText;
+	  	  index = 2;
+
+    }
+    if (document.getElementById('option-13').checked) {
+      checked = document.getElementById('label3').innerText;
+	  	  index = 3;
+
+    }
+    if (document.getElementById('option-14').checked) {
+      checked = document.getElementById('label4').innerText;
+	  	  index = 4;
+
+    }
+	
+	if(checked == jsonData[correct].ime || checked == jsonData[correct].broj){
+	  document.getElementById('block-1'+index.toString()).style.border = '3px solid limegreen'
+      document.getElementById('result-1'+index.toString()).style.color = 'limegreen'
+      document.getElementById('result-1'+index.toString()).innerHTML = 'Bravo!'
+	}
+	else{
+	  document.getElementById('block-1'+index.toString()).style.border = '3px solid red'
+      document.getElementById('result-1'+index.toString()).style.color = 'red'
+      document.getElementById('result-1'+index.toString()).innerHTML = 'Netocno!'
+	}
+  }
+  
+  function resetElements()
+  {
+ for (let i = 1; i < 5; i++) { 
+		document.getElementById('block-1'+i.toString()).style.border = '0px solid red'
+      document.getElementById('result-1'+i.toString()).style.color = 'white'
+      document.getElementById('result-1'+i.toString()).innerHTML = ''
+};
+  }
+  
+</script>
+</body>
+</html> 
+
