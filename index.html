@@ -139,13 +139,17 @@
 				',{ "ime":"Urgetreidebrot" , "broj":"/" }' +
 				',{ "ime":"Weizenkruste" , "broj":"/" }' +
 				',{ "ime":"Weltmeister" , "broj":"/" }' +
-				',{ "ime":"Xxl_Orientaler" , "broj":"/" }' +				
+				',{ "ime":"Xxl_Orientaler" , "broj":"/" }' +
+				
+				',{ "ime":"Filliale_Leiter" , "broj":"/" }' +				
 				']';
 				
 	var correct = 0;
+	var selfCounter = 0;
 	var imageCounter = 0;
 	var arr = [];					
 	let jsonData = JSON.parse(data);
+	var leiter = false;
 
 	onLoad();
 				
@@ -156,23 +160,31 @@
 				correct = 0;
 				arr = [];	
 				imageCounter += 1;
+				selfCounter += 1;
 				var shouldImage = imageCounter > 4;
+				leiter = false;
 				
 			do {
 			var numm = Math.floor(Math.random() * Object.keys(jsonData).length);
+			
 			  if(!arr.includes(numm)){
-			  
-				if(shouldImage && jsonData[numm].broj.includes('/')){
+				
+				if(jsonData[numm].ime == 'Filliale_Leiter' && selfCounter > 10){
+					leiter = true;
+					shouldImage = true;
+					selfCounter = 0;
+				}
+				else if(shouldImage && jsonData[numm].broj.includes('/') && jsonData[numm].ime != 'Filliale_Leiter'){
 					arr.push(numm);
 					imageCounter = 0;
 				}
-				else if(!shouldImage && !jsonData[numm].broj.includes('/')){
+				else if(!shouldImage && !jsonData[numm].broj.includes('/') && jsonData[numm].ime != 'Filliale_Leiter'){
 									arr.push(numm);
 				}
 				
 							  }
 			}
-			while (arr.length < 5); 
+			while (arr.length < 5 && !leiter); 
 			
 			correct = arr[Math.floor(Math.random() * arr.length)];
 			
@@ -214,6 +226,32 @@
 			//slika
 			else if(shouldImage){
 			
+			if(leiter){
+			
+			document.getElementById('slikaPitanje').style.width = "50%";
+			document.getElementById('slikaPitanje').src = 'slike/Filliale_Leiter.jpg';
+			document.getElementById('pitanje').innerHTML = '';
+			
+			correct = Math.floor(Math.random() * 5) + 1;
+			
+			var jobs = ['Putzfrau', 'Verkäufer', 'Service Kraft', 'Popescu Mitarbeiter', 'Wascherei'];
+			
+			 for (let i = 1; i < 6; i++) { 
+				var text = '';
+				
+				if(correct == i){
+					text = 'Filliale Leiter';
+				}
+				else{
+					text = jobs[Math.floor(Math.random() * jobs.length)];
+				}
+				
+				document.getElementById('label'+i.toString()).innerText = text;
+			};			
+			
+			
+			}
+			else{
 			document.getElementById('slikaPitanje').style.width = "50%";
 			document.getElementById('slikaPitanje').src = 'slike/' + jsonData[correct].ime + '.jpg';
 			document.getElementById('pitanje').innerHTML = '';
@@ -223,6 +261,7 @@
 			document.getElementById('label3').innerText = jsonData[arr[2]].ime;
 			document.getElementById('label4').innerText = jsonData[arr[3]].ime;
 			document.getElementById('label5').innerText = jsonData[arr[4]].ime;
+			}
 			
 			}		
 						
@@ -270,7 +309,7 @@
 	  	  index = 5;
     }
 	
-	if(checked == jsonData[correct].ime || checked == jsonData[correct].broj){
+	if(checked == jsonData[correct].ime || checked == jsonData[correct].broj || (leiter && index == correct)){
 	  document.getElementById('block-1'+index.toString()).style.border = '3px solid limegreen'
       document.getElementById('result-1'+index.toString()).style.color = 'limegreen'
       document.getElementById('result-1'+index.toString()).innerHTML = 'Bravo!'
