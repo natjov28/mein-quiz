@@ -155,29 +155,26 @@
 
 				correct = 0;
 				arr = [];	
-				var hasImage = false;
 				imageCounter += 1;
-
+				var shouldImage = imageCounter > 4;
 				
 			do {
 			var numm = Math.floor(Math.random() * Object.keys(jsonData).length);
-			  if(!arr.includes(numm) && (!hasImage || !jsonData[numm].broj.includes('/'))){
+			  if(!arr.includes(numm)){
 			  
-				if(!jsonData[numm].broj.includes('/') || imageCounter > 4)
+				if(shouldImage && jsonData[numm].broj.includes('/')){
 					arr.push(numm);
-				
-				if(jsonData[numm].broj.includes('/') && !hasImage && imageCounter > 4){
-				hasImage = true;
-				correct = numm;
-				imageCounter = 0;
-				}				
+					imageCounter = 0;
+				}
+				else if(!shouldImage && !jsonData[numm].broj.includes('/')){
+									arr.push(numm);
+				}
 				
 							  }
 			}
 			while (arr.length < 5); 
 			
-			if(!hasImage)
-				correct = arr[Math.floor(Math.random() * arr.length)];
+			correct = arr[Math.floor(Math.random() * arr.length)];
 			
 //console.log(imageCounter);
 //console.log(correct);
@@ -191,7 +188,7 @@
 
 			
 			//ime
-			if(property == 1 && !hasImage){
+			if(property == 1 && !shouldImage){
 			
 			document.getElementById('pitanje').innerHTML = jsonData[correct].ime;
 
@@ -203,7 +200,7 @@
 			
 			}
 			//broj
-			else if(property == 2 && !hasImage){
+			else if(property == 2 && !shouldImage){
 			
 			document.getElementById('pitanje').innerHTML = jsonData[correct].broj;
 
@@ -215,7 +212,7 @@
 
 			}
 			//slika
-			else if(hasImage){
+			else if(shouldImage){
 			
 			document.getElementById('slikaPitanje').style.width = "50%";
 			document.getElementById('slikaPitanje').src = 'slike/' + jsonData[correct].ime + '.jpg';
