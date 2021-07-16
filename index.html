@@ -143,6 +143,7 @@
 				']';
 				
 	var correct = 0;
+	var imageCounter = 0;
 	var arr = [];					
 	let jsonData = JSON.parse(data);
 
@@ -155,16 +156,22 @@
 				correct = 0;
 				arr = [];	
 				var hasImage = false;
-			
+				imageCounter += 1;
+
+				
 			do {
 			var numm = Math.floor(Math.random() * Object.keys(jsonData).length);
-			  if(!arr.includes(numm) && !hasImage || !jsonData[numm].broj.includes('/')){
-				arr.push(numm);
+			  if(!arr.includes(numm) && (!hasImage || !jsonData[numm].broj.includes('/'))){
+			  
+				if(!jsonData[numm].broj.includes('/') || imageCounter > 4)
+					arr.push(numm);
 				
-				if(!hasImage){
-				hasImage = jsonData[numm].broj.includes('/');
+				if(jsonData[numm].broj.includes('/') && !hasImage && imageCounter > 4){
+				hasImage = true;
 				correct = numm;
-				}
+				imageCounter = 0;
+				}				
+				
 							  }
 			}
 			while (arr.length < 5); 
@@ -172,6 +179,7 @@
 			if(!hasImage)
 				correct = arr[Math.floor(Math.random() * arr.length)];
 			
+//console.log(imageCounter);
 //console.log(correct);
 //console.log(jsonData[correct]);
 //console.log(arr);
