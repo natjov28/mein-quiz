@@ -179,7 +179,7 @@
 					
 			var property = Math.floor(Math.random() * 2) + 1; 
 //			var slikaSelected = jsonData[correct].broj.includes('/');
-			document.getElementById('slikaPitanje').style.visibility = "hidden";
+			document.getElementById('slikaPitanje').style.width = "0px";
 
 			
 			//ime
@@ -209,7 +209,7 @@
 			//slika
 			else if(hasImage){
 			
-			document.getElementById('slikaPitanje').style.visibility = "visible";
+			document.getElementById('slikaPitanje').style.width = "50%";
 			document.getElementById('slikaPitanje').src = 'slike/' + jsonData[correct].ime + '.jpg';
 			document.getElementById('pitanje').innerHTML = '';
 
