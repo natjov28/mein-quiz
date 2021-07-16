@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html style="line-height:0">
 
 <head>
@@ -12,12 +12,12 @@
 <body>
 
 <div>
-  <h1 id='pitanje' style="font-size: 48px; text-align: center;"></h3>
-  <p style="font-size: 16px; text-align: center;">izaberi 1 odgovor</p>
+  <h3 id='pitanje' style="font-size: 42px; text-align: center;"></h3>
+  <div style="display: grid;"><img id='slikaPitanje' style="justify-self: center; width: 50%;"/></div>
   <hr />
 
   <div id='block-11' style='padding: 10px;' onclick="selectOption(1)">
-    <label for='option-11' style=' padding: 5px; font-size: 24px;'>
+    <label for='option-11' style=' padding: 5px; font-size: 18px;'>
       <input type='radio' name='option' value='1' id='option-11' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
 	  	  <label id='label1'/>
 </label>
@@ -26,7 +26,7 @@
   <hr />
 
   <div id='block-12' style='padding: 10px;' onclick="selectOption(2)">
-    <label for='option-12' style=' padding: 5px; font-size: 24px;'>
+    <label for='option-12' style=' padding: 5px; font-size: 18px;'>
       <input type='radio' name='option' value='2' id='option-12' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
 	  	  <label id='label2'/>
 </label>
@@ -35,7 +35,7 @@
   <hr />
 
   <div id='block-13' style='padding: 10px;' onclick="selectOption(3)">
-    <label for='option-13' style=' padding: 5px; font-size: 24px;'>
+    <label for='option-13' style=' padding: 5px; font-size: 18px;'>
       <input type='radio' name='option' value='3' id='option-13' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
 	  	  <label id='label3'/>
       </label>
@@ -44,7 +44,7 @@
   <hr />
 
   <div id='block-14' style='padding: 10px;' onclick="selectOption(4)">
-    <label for='option-14' style=' padding: 5px; font-size: 24px;'>
+    <label for='option-14' style=' padding: 5px; font-size: 18px;'>
       <input type='radio' name='option' value='4' id='option-14' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
 	  <label id='label4'/>
       </label>
@@ -105,7 +105,32 @@
 				',{ "ime":"Blumenkohl" , "broj":"883" }' +
 				',{ "ime":"Träger leer ganzer Kasten" , "broj":"2902" }' +
 				',{ "ime":"Baumwolltragetasche" , "broj":"7387" }' +
-				
+
+				',{ "ime":"Bauerngluck" , "broj":"/" }' +
+				',{ "ime":"Biodinkelgluck" , "broj":"/" }' +
+				',{ "ime":"Biovitales" , "broj":"/" }' +
+				',{ "ime":"Bockergluck" , "broj":"/" }' +
+
+				',{ "ime":"Dinkelliebe" , "broj":"/" }' +
+				',{ "ime":"Doppelschrippe" , "broj":"/" }' +
+				',{ "ime":"Elsässer" , "broj":"/" }' +
+				',{ "ime":"Großerchamp" , "broj":"/" }' +
+
+				',{ "ime":"Kaisergold" , "broj":"/" }' +
+				',{ "ime":"Knuspersonne" , "broj":"/" }' +
+				',{ "ime":"Kornkäpitan" , "broj":"/" }' +
+				',{ "ime":"Kürbiskerl" , "broj":"/" }' +
+
+				',{ "ime":"Meiesterstücke" , "broj":"/" }' +
+				',{ "ime":"Rogenkruste" , "broj":"/" }' +
+				',{ "ime":"Rogenkrusti" , "broj":"/" }' +
+				',{ "ime":"Rosi_s_Liebling" , "broj":"/" }' +
+
+				',{ "ime":"Toscaninis" , "broj":"/" }' +
+				',{ "ime":"Urgetreidebrot" , "broj":"/" }' +
+				',{ "ime":"Weizenkruste" , "broj":"/" }' +
+				',{ "ime":"Weltmeister" , "broj":"/" }' +
+				',{ "ime":"Xxl_Orientaler" , "broj":"/" }' +				
 				']';
 				
 	var correct = 0;
@@ -120,50 +145,68 @@
 
 				correct = 0;
 				arr = [];	
-																
+				var hasImage = false;
+			
 			do {
 			var numm = Math.floor(Math.random() * Object.keys(jsonData).length);
-			  if(!arr.includes(numm)){
+			  if(!arr.includes(numm) && !hasImage || !jsonData[numm].broj.includes('/')){
 				arr.push(numm);
+				
+				if(!hasImage){
+				hasImage = jsonData[numm].broj.includes('/');
+				correct = numm;
+				}
 							  }
 			}
 			while (arr.length < 4); 
 			
-			correct = arr[Math.floor(Math.random() * arr.length)];
+			if(!hasImage)
+				correct = arr[Math.floor(Math.random() * arr.length)];
 			
 //console.log(correct);
+//console.log(jsonData[correct]);
 //console.log(arr);
 //console.log(jsonData);
 					
 			var property = Math.floor(Math.random() * 2) + 1; 
-			
+//			var slikaSelected = jsonData[correct].broj.includes('/');
+			document.getElementById('slikaPitanje').src = '';
+
 			
 			//ime
-			if(property == 1){
+			if(property == 1 && !hasImage){
 			
 			document.getElementById('pitanje').innerHTML = jsonData[correct].ime;
-			
+
 			document.getElementById('label1').innerText = jsonData[arr[0]].broj;
 			document.getElementById('label2').innerText = jsonData[arr[1]].broj;
 			document.getElementById('label3').innerText = jsonData[arr[2]].broj;
 			document.getElementById('label4').innerText = jsonData[arr[3]].broj;
 			
-			
-			
-			}//broj
-			else if(property == 2){
+			}
+			//broj
+			else if(property == 2 && !hasImage){
 			
 			document.getElementById('pitanje').innerHTML = jsonData[correct].broj;
-			
+
 			document.getElementById('label1').innerText = jsonData[arr[0]].ime;
 			document.getElementById('label2').innerText = jsonData[arr[1]].ime;
 			document.getElementById('label3').innerText = jsonData[arr[2]].ime;
 			document.getElementById('label4').innerText = jsonData[arr[3]].ime;
 			
-	
+			}
+			//slika
+			else if(hasImage){
 			
-			};
+			document.getElementById('slikaPitanje').src = 'slike/' + jsonData[correct].ime + '.jpg';
+			document.getElementById('pitanje').innerHTML = '';
+
+			document.getElementById('label1').innerText = jsonData[arr[0]].ime;
+			document.getElementById('label2').innerText = jsonData[arr[1]].ime;
+			document.getElementById('label3').innerText = jsonData[arr[2]].ime;
+			document.getElementById('label4').innerText = jsonData[arr[3]].ime;
 			
+			}		
 						
 	}
 				
@@ -230,4 +273,3 @@
 </script>
 </body>
 </html> 
-
