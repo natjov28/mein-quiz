@@ -12,12 +12,12 @@
 <body>
 
 <div>
-  <h3 id='pitanje' style="font-size: 42px; text-align: center;"></h3>
+  <h3 id='pitanje' style="font-size: 32px; text-align: center;"></h3>
   <div style="display: grid;"><img id='slikaPitanje' style="justify-self: center; width: 50%;"/></div>
   <hr />
 
   <div id='block-11' style='padding: 10px;' onclick="selectOption(1)">
-    <label for='option-11' style=' padding: 5px; font-size: 18px;'>
+    <label for='option-11' style=' padding: 5px; font-size: 12px;'>
       <input type='radio' name='option' value='1' id='option-11' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
 	  	  <label id='label1'/>
 </label>
@@ -26,7 +26,7 @@
   <hr />
 
   <div id='block-12' style='padding: 10px;' onclick="selectOption(2)">
-    <label for='option-12' style=' padding: 5px; font-size: 18px;'>
+    <label for='option-12' style=' padding: 5px; font-size: 12px;'>
       <input type='radio' name='option' value='2' id='option-12' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
 	  	  <label id='label2'/>
 </label>
@@ -35,7 +35,7 @@
   <hr />
 
   <div id='block-13' style='padding: 10px;' onclick="selectOption(3)">
-    <label for='option-13' style=' padding: 5px; font-size: 18px;'>
+    <label for='option-13' style=' padding: 5px; font-size: 12px;'>
       <input type='radio' name='option' value='3' id='option-13' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
 	  	  <label id='label3'/>
       </label>
@@ -44,11 +44,20 @@
   <hr />
 
   <div id='block-14' style='padding: 10px;' onclick="selectOption(4)">
-    <label for='option-14' style=' padding: 5px; font-size: 18px;'>
+    <label for='option-14' style=' padding: 5px; font-size: 12px;'>
       <input type='radio' name='option' value='4' id='option-14' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
 	  <label id='label4'/>
       </label>
     <span id='result-14'></span>
+  </div>
+  <hr />
+  
+  <div id='block-15' style='padding: 10px;' onclick="selectOption(5)">
+    <label for='option-15' style=' padding: 5px; font-size: 12px;'>
+      <input type='radio' name='option' value='5' id='option-15' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
+	  <label id='label5'/>
+      </label>
+    <span id='result-15'></span>
   </div>
   <hr />
   
@@ -158,7 +167,7 @@
 				}
 							  }
 			}
-			while (arr.length < 4); 
+			while (arr.length < 5); 
 			
 			if(!hasImage)
 				correct = arr[Math.floor(Math.random() * arr.length)];
@@ -170,7 +179,7 @@
 					
 			var property = Math.floor(Math.random() * 2) + 1; 
 //			var slikaSelected = jsonData[correct].broj.includes('/');
-			document.getElementById('slikaPitanje').src = '';
+			document.getElementById('slikaPitanje').style.visibility = "hidden";
 
 			
 			//ime
@@ -182,6 +191,7 @@
 			document.getElementById('label2').innerText = jsonData[arr[1]].broj;
 			document.getElementById('label3').innerText = jsonData[arr[2]].broj;
 			document.getElementById('label4').innerText = jsonData[arr[3]].broj;
+			document.getElementById('label5').innerText = jsonData[arr[4]].broj;
 			
 			}
 			//broj
@@ -193,11 +203,13 @@
 			document.getElementById('label2').innerText = jsonData[arr[1]].ime;
 			document.getElementById('label3').innerText = jsonData[arr[2]].ime;
 			document.getElementById('label4').innerText = jsonData[arr[3]].ime;
-			
+			document.getElementById('label5').innerText = jsonData[arr[4]].ime;
+
 			}
 			//slika
 			else if(hasImage){
 			
+			document.getElementById('slikaPitanje').style.visibility = "visible";
 			document.getElementById('slikaPitanje').src = 'slike/' + jsonData[correct].ime + '.jpg';
 			document.getElementById('pitanje').innerHTML = '';
 
@@ -205,6 +217,7 @@
 			document.getElementById('label2').innerText = jsonData[arr[1]].ime;
 			document.getElementById('label3').innerText = jsonData[arr[2]].ime;
 			document.getElementById('label4').innerText = jsonData[arr[3]].ime;
+			document.getElementById('label5').innerText = jsonData[arr[4]].ime;
 			
 			}		
 						
@@ -214,7 +227,7 @@
 	function selectOption(index){
 	
 	
-	 for (let i = 1; i < 5; i++) { 
+	 for (let i = 1; i < 6; i++) { 
 				document.getElementById('option-1'+i.toString()).checked = (i == index);
 };
 	
@@ -246,7 +259,10 @@
     if (document.getElementById('option-14').checked) {
       checked = document.getElementById('label4').innerText;
 	  	  index = 4;
-
+    }
+	if (document.getElementById('option-15').checked) {
+      checked = document.getElementById('label5').innerText;
+	  	  index = 5;
     }
 	
 	if(checked == jsonData[correct].ime || checked == jsonData[correct].broj){
@@ -263,7 +279,7 @@
   
   function resetElements()
   {
- for (let i = 1; i < 5; i++) { 
+ for (let i = 1; i < 6; i++) { 
 		document.getElementById('block-1'+i.toString()).style.border = '0px solid red'
       document.getElementById('result-1'+i.toString()).style.color = 'white'
       document.getElementById('result-1'+i.toString()).innerHTML = ''
