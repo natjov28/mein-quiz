@@ -11,64 +11,142 @@
 </head>
 <body>
 
-<div>
-  <h3 id='pitanje' style="font-size: 32px; text-align: center;"></h3>
-  <div style="display: grid;"><img id='slikaPitanje' style="justify-self: center; width: 50%;"/></div>
-  <hr />
+<style>
+html,body{ margin:0; padding:0; 
+  height:100%;
+  width:100%;
+  overflow:hidden;
+  background-color: #f7dd00;
+}
 
-  <div id='block-11' style='padding: 10px;' onclick="selectOption(1)">
-    <label for='option-11' style=' padding: 5px; font-size: 12px;'>
-      <input type='radio' name='option' value='1' id='option-11' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
-	  	  <label id='label1'/>
-</label>
-    <span id='result-11'></span>
-  </div>
-  <hr />
+.full-size{
+  height:100%;
+  width:100%;
+}
 
-  <div id='block-12' style='padding: 10px;' onclick="selectOption(2)">
-    <label for='option-12' style=' padding: 5px; font-size: 12px;'>
-      <input type='radio' name='option' value='2' id='option-12' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
-	  	  <label id='label2'/>
-</label>
-    <span id='result-12'></span>
-  </div>
-  <hr />
+.container {
+  display: inline;
+}
 
-  <div id='block-13' style='padding: 10px;' onclick="selectOption(3)">
-    <label for='option-13' style=' padding: 5px; font-size: 12px;'>
-      <input type='radio' name='option' value='3' id='option-13' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
-	  	  <label id='label3'/>
-      </label>
-    <span id='result-13'></span>
-  </div>
-  <hr />
-
-  <div id='block-14' style='padding: 10px;' onclick="selectOption(4)">
-    <label for='option-14' style=' padding: 5px; font-size: 12px;'>
-      <input type='radio' name='option' value='4' id='option-14' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
-	  <label id='label4'/>
-      </label>
-    <span id='result-14'></span>
-  </div>
-  <hr />
+.panel {
   
-  <div id='block-15' style='padding: 10px;' onclick="selectOption(5)">
-    <label for='option-15' style=' padding: 5px; font-size: 12px;'>
-      <input type='radio' name='option' value='5' id='option-15' style='transform: scale(1.6); margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
-	  <label id='label5'/>
-      </label>
-    <span id='result-15'></span>
-  </div>
-  <hr />
-  
-  <div style="display: flex; justify-content: space-around;">
-  <button type='button' onclick='onLoad()' style='width: 100px; height: 40px; border-radius: 3px; background-color: darkred; font-weight: 700; color: white'>Sljedece</button>
-  
-    <button type='button' onclick='displayAnswer1()' style='width: 150px; height: 80px; border-radius: 3px; background-color: darkgreen; font-weight: 700; color: white'>Potvrdi</button>
+}
 
-  </div>
+.pitanje-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  word-break: break-word;
+  font-size: 32px;
+  text-align: center;
+}
+
+.block{
+	display: flex;
+	align-items: center;
+}
+
+.border-list{
+	border: 1px dashed black;
+	border-left-style: none;
+	border-right-style: none;
+	
+}
+
+.popup{
+  animation: popup 0.5s;
+}
+
+@keyframes popup {
+  0%{
+    transform: scale(0);
+	height: 100%;
+  }
+  50%{
+    transform: scale(1);
+	height: 100%;
+  }
+  60%{
+    transform: scale(1.1);
+	height: 100%;
+  }
+  70%{
+    transform: scale(1);
+	height: 100%;
+  }
+  80%{
+    transform: scale(1.1);
+	height: 100%;
+  }
+  90%{
+    transform: scale(1);
+	height: 100%;
+  }
+  100%{
+    transform: scale(1);
+	height: 0px;
+  }
+}
+
+</style>
+
+<div id='abs-cont' class="full-size" style="position: absolute; height: 0px">
+    <img class="full-size" id='icon' style="height: 0px; object-fit: contain; padding: 10px;"/>
 </div>
-<a id='showanswer1'></a>
+
+<div class="container">
+  <div class="panel" style="height: 50%">
+  
+	  <div class="pitanje-cont" id='pitanje_container'>
+		  <span id='pitanje'></span>
+	  </div>
+	  
+      <img id='slikaPitanje' style="height: 100%; width: 0%; object-fit: contain; padding: 10px" />
+  
+  </div>
+  
+  <div class="panel" style="height: 40%">
+  <div class="full-size">
+		
+		    <div class="block border-list" id='block-11' style='height: 33.3%; margin-top: 5px' onclick="displayAnswer(1)">
+				<label for='option-11' style='margin-left: 15px'>
+					<input type='radio' name='option' value='1' id='option-11' style='transform: scale(1.6); margin-right: 10px;' />
+					<label id='label1' />
+				</label>
+				<span id='result-11'></span>
+			</div>
+			
+			<div class="block border-list" id='block-12' style='height: 33.3%; border-top-style: none;' onclick="displayAnswer(2)">
+				<label for='option-12' style='margin-left: 15px'>
+					<input type='radio' name='option' value='2' id='option-12' style='transform: scale(1.6); margin-right: 10px;' />
+					<label id='label2' />
+				</label>
+				<span id='result-12'></span>
+			</div>
+
+	  		<div class="block border-list" id='block-13' style='height: 33.3%; border-top-style: none;' onclick="displayAnswer(3)">
+				<label for='option-13' style='margin-left: 15px'>
+					<input type='radio' name='option' value='3' id='option-13' style='transform: scale(1.6); margin-right: 10px;' />
+					<label id='label3' />
+				</label>
+				<span id='result-13'></span>
+			</div>
+			
+  </div>
+  </div>
+  
+  
+  <div class="panel block" style="height: 10%; justify-content: center">
+  
+  <button type='button' onclick='onLoad()' style='border: 3px solid black; width: 100px; height: 70%; border-radius: 3px; background-color: #dc3837; font-weight: 700; color: #f7dd00;'>WEITER</button>
+  
+  </div>
+  
+</div>
+
+
 <script>
 
 	let data =	'[' +
@@ -140,8 +218,7 @@
 				',{ "ime":"Weizenkruste" , "broj":"/" }' +
 				',{ "ime":"Weltmeister" , "broj":"/" }' +
 				',{ "ime":"Xxl_Orientaler" , "broj":"/" }' +
-				
-				',{ "ime":"Filliale_Leiter" , "broj":"/" }' +				
+							
 				']';
 				
 	var correct = 0;
@@ -160,44 +237,45 @@
 				correct = 0;
 				arr = [];	
 				imageCounter += 1;
-				selfCounter += 1;
+				//selfCounter += 1;
 				var shouldImage = imageCounter > 4;
-				leiter = false;
+				//leiter = false;
 				
 			do {
 			var numm = Math.floor(Math.random() * Object.keys(jsonData).length);
 			
 			  if(!arr.includes(numm)){
 				
-				if(jsonData[numm].ime == 'Filliale_Leiter' && selfCounter > 10){
-					leiter = true;
-					shouldImage = true;
-					selfCounter = 0;
-				}
-				else if(shouldImage && jsonData[numm].broj.includes('/') && jsonData[numm].ime != 'Filliale_Leiter'){
+				//if(jsonData[numm].ime == 'Filliale_Leiter' && selfCounter > 10){
+				//	leiter = true;
+				//	shouldImage = true;
+				//	selfCounter = 0;
+				//}
+				if(shouldImage && jsonData[numm].broj.includes('/')){
 					arr.push(numm);
 					imageCounter = 0;
 				}
-				else if(!shouldImage && !jsonData[numm].broj.includes('/') && jsonData[numm].ime != 'Filliale_Leiter'){
+				else if(!shouldImage && !jsonData[numm].broj.includes('/')){
 									arr.push(numm);
 				}
 				
 							  }
 			}
-			while (arr.length < 5 && !leiter); 
+			while (arr.length < 3); 
 			
 			correct = arr[Math.floor(Math.random() * arr.length)];
 			
 //console.log(imageCounter);
 //console.log(correct);
-//console.log(jsonData[correct]);
+console.log(jsonData[correct]);
 //console.log(arr);
 //console.log(jsonData);
 					
 			var property = Math.floor(Math.random() * 2) + 1; 
 //			var slikaSelected = jsonData[correct].broj.includes('/');
-			document.getElementById('slikaPitanje').style.width = "0px";
 
+			document.getElementById('pitanje_container').style.height = "100%";
+			document.getElementById('slikaPitanje').style.width = "0px";
 			
 			//ime
 			if(property == 1 && !shouldImage){
@@ -207,61 +285,34 @@
 			document.getElementById('label1').innerText = jsonData[arr[0]].broj;
 			document.getElementById('label2').innerText = jsonData[arr[1]].broj;
 			document.getElementById('label3').innerText = jsonData[arr[2]].broj;
-			document.getElementById('label4').innerText = jsonData[arr[3]].broj;
-			document.getElementById('label5').innerText = jsonData[arr[4]].broj;
+			//document.getElementById('label4').innerText = jsonData[arr[3]].broj;
+			//document.getElementById('label5').innerText = jsonData[arr[4]].broj;
 			
 			}
 			//broj
 			else if(property == 2 && !shouldImage){
 			
 			document.getElementById('pitanje').innerHTML = jsonData[correct].broj;
-
+            
 			document.getElementById('label1').innerText = jsonData[arr[0]].ime;
 			document.getElementById('label2').innerText = jsonData[arr[1]].ime;
 			document.getElementById('label3').innerText = jsonData[arr[2]].ime;
-			document.getElementById('label4').innerText = jsonData[arr[3]].ime;
-			document.getElementById('label5').innerText = jsonData[arr[4]].ime;
+			//document.getElementById('label4').innerText = jsonData[arr[3]].ime;
+			//document.getElementById('label5').innerText = jsonData[arr[4]].ime;
 
 			}
 			//slika
 			else if(shouldImage){
 			
-			if(leiter){
-			
-			document.getElementById('slikaPitanje').style.width = "50%";
-			document.getElementById('slikaPitanje').src = 'slike/Filliale_Leiter.jpg';
-			document.getElementById('pitanje').innerHTML = '';
-			
-			correct = Math.floor(Math.random() * 5) + 1;
-			
-			var jobs = ['Putzfrau', 'Verkäufer', 'Service Kraft', 'Popescu Mitarbeiter', 'Wascherei'];
-			
-			 for (let i = 1; i < 6; i++) { 
-				var text = '';
-				
-				if(correct == i){
-					text = 'Filliale Leiter';
-				}
-				else{
-					text = jobs[Math.floor(Math.random() * jobs.length)];
-				}
-				
-				document.getElementById('label'+i.toString()).innerText = text;
-			};			
-			
-			
-			}
-			else{
-			document.getElementById('slikaPitanje').style.width = "50%";
+			document.getElementById('pitanje_container').style.height = "0px";
+			document.getElementById('slikaPitanje').style.width = "100%";
 			document.getElementById('slikaPitanje').src = 'slike/' + jsonData[correct].ime + '.jpg';
-			document.getElementById('pitanje').innerHTML = '';
 
 			document.getElementById('label1').innerText = jsonData[arr[0]].ime;
 			document.getElementById('label2').innerText = jsonData[arr[1]].ime;
 			document.getElementById('label3').innerText = jsonData[arr[2]].ime;
-			document.getElementById('label4').innerText = jsonData[arr[3]].ime;
-			document.getElementById('label5').innerText = jsonData[arr[4]].ime;
-			}
+			//document.getElementById('label4').innerText = jsonData[arr[3]].ime;
+			//document.getElementById('label5').innerText = jsonData[arr[4]].ime;
 			
 			}		
 						
@@ -271,62 +322,87 @@
 	function selectOption(index){
 	
 	
-	 for (let i = 1; i < 6; i++) { 
+	 for (let i = 1; i < 4; i++) { 
 				document.getElementById('option-1'+i.toString()).checked = (i == index);
 };
 	
+	displayAnswer();
 	
 	}
 				
   //    The function evaluates the answer and displays result
-  function displayAnswer1() {
+  function displayAnswer(index) {
 	
-	resetElements();
 	
-	var checked = '';
-	var index = 0;
+	//var checked = '';
+	//var index = 0;
+	//
+	//if (document.getElementById('option-11').checked) {
+    //  checked = document.getElementById('label1').innerText;
+	//  index = 1;
+    //}
+    //if (document.getElementById('option-12').checked) {
+    //  checked = document.getElementById('label2').innerText;
+	//  	  index = 2;
+    //
+    //}
+    //if (document.getElementById('option-13').checked) {
+    //  checked = document.getElementById('label3').innerText;
+	//  	  index = 3;
+    //
+    //}
+    //if (document.getElementById('option-14').checked) {
+    //  checked = document.getElementById('label4').innerText;
+	//  	  index = 4;
+    //}
+	//if (document.getElementById('option-15').checked) {
+    //  checked = document.getElementById('label5').innerText;
+	//  	  index = 5;
+    //}
 	
-	if (document.getElementById('option-11').checked) {
-      checked = document.getElementById('label1').innerText;
-	  index = 1;
-    }
-    if (document.getElementById('option-12').checked) {
-      checked = document.getElementById('label2').innerText;
-	  	  index = 2;
+	document.getElementById('option-1'+index.toString()).checked = true;
+	
+	checked = document.getElementById('label'+index.toString()).innerText;
+	
+	document.getElementById('abs-cont').style.height = '100%';
 
-    }
-    if (document.getElementById('option-13').checked) {
-      checked = document.getElementById('label3').innerText;
-	  	  index = 3;
-
-    }
-    if (document.getElementById('option-14').checked) {
-      checked = document.getElementById('label4').innerText;
-	  	  index = 4;
-    }
-	if (document.getElementById('option-15').checked) {
-      checked = document.getElementById('label5').innerText;
-	  	  index = 5;
-    }
+	if(checked == jsonData[correct].ime || checked == jsonData[correct].broj){
 	
-	if(checked == jsonData[correct].ime || checked == jsonData[correct].broj || (leiter && index == correct)){
-	  document.getElementById('block-1'+index.toString()).style.border = '3px solid limegreen'
-      document.getElementById('result-1'+index.toString()).style.color = 'limegreen'
-      document.getElementById('result-1'+index.toString()).innerHTML = 'Bravo!'
+	document.getElementById('icon').src = 'svg/ja.png';
+
+	document.getElementById('icon').classList.add('popup');		
+	  //document.getElementById('block-1'+index.toString()).style.border = '3px solid limegreen'
+      //document.getElementById('result-1'+index.toString()).style.color = 'limegreen'
+      //document.getElementById('result-1'+index.toString()).innerHTML = 'Bravo!'
 	}
 	else{
-	  document.getElementById('block-1'+index.toString()).style.border = '3px solid red'
-      document.getElementById('result-1'+index.toString()).style.color = 'red'
-      document.getElementById('result-1'+index.toString()).innerHTML = 'Netocno!'
+	
+		document.getElementById('icon').src = 'svg/nein.png';
+		//document.getElementById('icon').style = 'full-size popup';
+		
+		document.getElementById('icon').classList.add('popup');
+	  //document.getElementById('block-1'+index.toString()).style.border = '3px solid red'
+      //document.getElementById('result-1'+index.toString()).style.color = 'red'
+      //document.getElementById('result-1'+index.toString()).innerHTML = 'Netocno!'
 	}
+	
+	setTimeout(function(){
+	  document.getElementById('abs-cont').style.height = '0px';
+	  
+	  document.getElementById('icon').classList.remove('popup');		
+	  document.getElementById('icon').src = '';	
+
+	}, 500);
   }
   
   function resetElements()
   {
- for (let i = 1; i < 6; i++) { 
-		document.getElementById('block-1'+i.toString()).style.border = '0px solid red'
-      document.getElementById('result-1'+i.toString()).style.color = 'white'
-      document.getElementById('result-1'+i.toString()).innerHTML = ''
+ for (let i = 1; i < 4; i++) { 
+	//	document.getElementById('block-1'+i.toString()).style.border = '0px solid red'
+    //  document.getElementById('result-1'+i.toString()).style.color = 'white'
+    //  document.getElementById('result-1'+i.toString()).innerHTML = ''
+	
+	document.getElementById('option-1'+i.toString()).checked = false;
 };
   }
   
