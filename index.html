@@ -12,7 +12,7 @@
 <body>
 
 <style>
-html,body{ margin:0; padding:0; 
+html,body{ margin:0; padding-bottom: 10px; 
   height:100%;
   width:100%;
   overflow:hidden;
@@ -140,7 +140,7 @@ html,body{ margin:0; padding:0;
   
   <div class="panel block" style="height: 10%; justify-content: center">
   
-  <button type='button' onclick='onLoad()' style='border: 3px solid black; width: 100px; height: 70%; border-radius: 3px; background-color: #dc3837; font-weight: 700; color: #f7dd00;'>WEITER</button>
+  <button type='button' onclick='onLoad()' style='border: 3px solid black; width: 100px; min-height: 70%; border-radius: 3px; background-color: #dc3837; font-weight: 700; color: #f7dd00;'>WEITER</button>
   
   </div>
   
@@ -267,7 +267,7 @@ html,body{ margin:0; padding:0;
 			
 //console.log(imageCounter);
 //console.log(correct);
-console.log(jsonData[correct]);
+//console.log(jsonData[correct]);
 //console.log(arr);
 //console.log(jsonData);
 					
@@ -277,7 +277,8 @@ console.log(jsonData[correct]);
 			document.getElementById('pitanje').innerHTML = "";
 			document.getElementById('pitanje_container').style.height = "100%";
 			document.getElementById('slikaPitanje').style.width = "0px";
-			
+			document.getElementById('slikaPitanje').src = '';
+
 			//ime
 			if(property == 1 && !shouldImage){
 			
