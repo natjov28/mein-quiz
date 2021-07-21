@@ -97,6 +97,16 @@ html,body{ margin:0; padding-bottom: 10px;
 </div>
 
 <div class="container">
+
+  <div class="panel" style="position: absolute; margin-top: 10px; left: 5%">
+
+	  <select id="combobox" onchange="setVisibility()">
+      <option id="1" selected="selected">Auswahl</option>
+      <option id="2">Eingabe</option>
+     </select>
+
+	 </div>
+	 
   <div class="panel" style="height: 50%">
   
 	  <div class="pitanje-cont" id='pitanje_container'>
@@ -108,7 +118,7 @@ html,body{ margin:0; padding-bottom: 10px;
   </div>
   
   <div class="panel" style="height: 40%">
-  <div class="full-size">
+  <div id='auswahlContainer' class="full-size">
 		
 		    <div class="block border-list" id='block-11' style='height: 33.3%; margin-top: 5px' onclick="displayAnswer(1)">
 				<label for='option-11' style='margin-left: 15px'>
@@ -135,12 +145,23 @@ html,body{ margin:0; padding-bottom: 10px;
 			</div>
 			
   </div>
+  
+    <div id='eingabeContainer' class="full-size" style="visibility: collapse">
+
+	 <div class="block" id='block-11' style='height: 33.3%; margin-top: 5px; display: grid' onclick="">
+		<input style="text-align: center; justify-self: center" type="text" id="antwort" name="firstname" placeholder="Antwort...">
+	</div>
+  
+    </div>
+  
   </div>
   
   
-  <div class="panel block" style="height: 10%; justify-content: center">
+  <div id='btn-block' class="panel block" style="height: 10%; justify-content: center">
   
   <button type='button' onclick='onLoad()' style='border: 3px solid black; width: 100px; min-height: 70%; border-radius: 3px; background-color: #dc3837; font-weight: 700; color: #f7dd00;'>WEITER</button>
+
+  <button id='checkBtn' type='button' onclick='checkInputResult()' style='border: 3px solid black; width: 100px; min-height: 70%; border-radius: 3px; background-color: #f7dd00; font-weight: 700; color: #dc3837; visibility: collapse'>PRÜFEN</button>
   
   </div>
   
@@ -227,10 +248,13 @@ html,body{ margin:0; padding-bottom: 10px;
 	var arr = [];					
 	let jsonData = JSON.parse(data);
 	var leiter = false;
+	var auswahl = true;
 
 	onLoad();
 				
 	function onLoad() {
+			
+			document.getElementById("antwort").value = "";
 			
 				resetElements();
 
@@ -251,12 +275,15 @@ html,body{ margin:0; padding-bottom: 10px;
 				//	shouldImage = true;
 				//	selfCounter = 0;
 				//}
-				if(shouldImage && jsonData[numm].broj.includes('/')){
+				if(shouldImage && jsonData[numm].broj.includes('/') && auswahl){
 					arr.push(numm);
 					imageCounter = 0;
 				}
-				else if(!shouldImage && !jsonData[numm].broj.includes('/')){
+				else if(!shouldImage && !jsonData[numm].broj.includes('/') && auswahl){
 									arr.push(numm);
+				}
+				else if(!auswahl && !jsonData[numm].broj.includes('/')){
+					arr.push(numm);
 				}
 				
 							  }
@@ -280,7 +307,7 @@ html,body{ margin:0; padding-bottom: 10px;
 			document.getElementById('slikaPitanje').src = '';
 
 			//ime
-			if(property == 1 && !shouldImage){
+			if(property == 1 && !shouldImage && auswahl){
 			
 			document.getElementById('pitanje').innerHTML = jsonData[correct].ime;
 
@@ -292,7 +319,7 @@ html,body{ margin:0; padding-bottom: 10px;
 			
 			}
 			//broj
-			else if(property == 2 && !shouldImage){
+			else if(property == 2 && !shouldImage && auswahl){
 			
 			document.getElementById('pitanje').innerHTML = jsonData[correct].broj;
             
@@ -302,6 +329,13 @@ html,body{ margin:0; padding-bottom: 10px;
 			//document.getElementById('label4').innerText = jsonData[arr[3]].ime;
 			//document.getElementById('label5').innerText = jsonData[arr[4]].ime;
 
+			}
+			//comboBox
+			else if(!auswahl){
+			
+			document.getElementById('pitanje').innerHTML = jsonData[correct].ime;
+
+			
 			}
 			//slika
 			else if(shouldImage){
@@ -407,6 +441,74 @@ html,body{ margin:0; padding-bottom: 10px;
 	
 	document.getElementById('option-1'+i.toString()).checked = false;
 };
+  }
+  
+  function setVisibility(){
+  
+     var elem = document.getElementById("combobox");
+	
+	 var state;
+
+	 if(elem.value == "Auswahl"){
+		state = "visible";
+		auswahl = true;
+		
+			document.getElementById("eingabeContainer").style.height = "0px"; 
+			document.getElementById("eingabeContainer").style.visibility = "collapse"; 
+			document.getElementById("auswahlContainer").style.height = "100%"; 
+			
+			document.getElementById('btn-block').style.justifyContent = 'center';
+			document.getElementById('checkBtn').style.visibility = 'collapse';
+
+
+	 }
+	 else{
+	 		state = "collapse";
+			auswahl = false;
+			
+			document.getElementById('btn-block').style.justifyContent = 'space-evenly';
+			document.getElementById('checkBtn').style.visibility = 'visible';
+
+			document.getElementById("eingabeContainer").style.visibility = "visible"; 
+			document.getElementById("eingabeContainer").style.height = "100%"; 
+			document.getElementById("auswahlContainer").style.height = "0px"; 
+
+	 }
+  
+        document.getElementById("slikaPitanje").style.visibility = state; 
+        document.getElementById("auswahlContainer").style.visibility = state; 
+		
+		onLoad();
+  }
+  
+  function checkInputResult(){
+  
+  
+	var correctInput = jsonData[correct].broj == document.getElementById("antwort").value; 
+  	 document.getElementById('abs-cont').style.height = '100%';
+
+  	if(correctInput){
+	
+	document.getElementById('icon').src = 'svg/ja.png';
+
+	document.getElementById('icon').classList.add('popup');		
+	}
+	else{
+	
+		document.getElementById('icon').src = 'svg/nein.png';
+		
+		document.getElementById('icon').classList.add('popup');
+	}
+	
+	
+	setTimeout(function(){
+	  document.getElementById('abs-cont').style.height = '0px';
+	  
+	  document.getElementById('icon').classList.remove('popup');		
+	  document.getElementById('icon').src = '';	
+
+	}, 500);
+  
   }
   
 </script>
