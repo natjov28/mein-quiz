@@ -149,6 +149,7 @@ html,body{ margin:0; padding-bottom: 10px;
     <div id='eingabeContainer' class="full-size" style="visibility: collapse">
 
 	 <div class="block" id='block-11' style='height: 33.3%; margin-top: 5px; display: grid' onclick="">
+	    <label style="text-align: center; justify-self: center; color: green; font-size: 48px" for="antwort" id="antwortLabel"></label><br>
 		<input style="text-align: center; justify-self: center" type="number" id="antwort" name="firstname" placeholder="Antwort...">
 	</div>
   
@@ -500,6 +501,8 @@ html,body{ margin:0; padding-bottom: 10px;
 		document.getElementById('icon').classList.add('popup');
 	}
 	
+	  	 document.getElementById('antwortLabel').innerText = jsonData[correct].broj;
+
 	
 	setTimeout(function(){
 	  document.getElementById('abs-cont').style.height = '0px';
