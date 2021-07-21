@@ -172,75 +172,159 @@ html,body{ margin:0; padding-bottom: 10px;
 <script>
 
 	let data =	'[' +
-				'{ "ime":"Bananen lose" , "broj":"1" }' +
-				',{ "ime":"Apfel lose (rot)" , "broj":"2" }' +
-				',{ "ime":"Sellerie lose" , "broj":"4" }' +
-				',{ "ime":"Bio Ingwer lose" , "broj":"11" }' +
+				'{ "ime":"Bananen lose" , "broj":"1" , "img":"n" }' +
+				',{ "ime":"Apfel lose (rot)" , "broj":"2" , "img":"n" }' +
+				',{ "ime":"Sellerie lose" , "broj":"4" , "img":"n" }' +
+				',{ "ime":"Bio Ingwer lose" , "broj":"11" , "img":"n" }' +
 
-				',{ "ime":"Birne Abate Premium" , "broj":"18" }' +
-				',{ "ime":"Apfel lose (grün)" , "broj":"21" }' +
-				',{ "ime":"Tomaten Rispen lose" , "broj":"27" }' +
-				',{ "ime":"Weißkohl lose" , "broj":"28" }' +
+				',{ "ime":"Birne Abate Premium" , "broj":"18" , "img":"n" }' +
+				',{ "ime":"Apfel lose (grün)" , "broj":"21" , "img":"n" }' +
+				',{ "ime":"Tomaten Rispen lose" , "broj":"27" , "img":"n" }' +
+				',{ "ime":"Weißkohl lose" , "broj":"28" , "img":"n" }' +
 
-				',{ "ime":"Bananen Chiquita" , "broj":"30" }' +
-				',{ "ime":"Apfel Pink Lady lose" , "broj":"32" }' +
-				',{ "ime":"Erdbeeren lose" , "broj":"42" }' +
-				',{ "ime":"Paprika rot lose" , "broj":"44" }' +
+				',{ "ime":"Bananen Chiquita" , "broj":"30" , "img":"n" }' +
+				',{ "ime":"Apfel Pink Lady lose" , "broj":"32" , "img":"n" }' +
+				',{ "ime":"Erdbeeren lose" , "broj":"42" , "img":"n" }' +
+				',{ "ime":"Paprika rot lose" , "broj":"44" , "img":"n" }' +
 
-				',{ "ime":"Aprikosen lose" , "broj":"47" }' +
-				',{ "ime":"Wassermelonen lose" , "broj":"50" }' +
-				',{ "ime":"Nektarinen Gelbfl. lose" , "broj":"52" }' +
-				',{ "ime":"Kirschen lose" , "broj":"67" }' +
+				',{ "ime":"Aprikosen lose" , "broj":"47" , "img":"n" }' +
+				',{ "ime":"Wassermelonen lose" , "broj":"50" , "img":"n" }' +
+				',{ "ime":"Nektarinen Gelbfl. lose" , "broj":"52" , "img":"n" }' +
+				',{ "ime":"Kirschen lose" , "broj":"67" , "img":"n" }' +
 
-				',{ "ime":"Birne rot lose" , "broj":"80" }' +
-				',{ "ime":"Trauben hell kernlos lose" , "broj":"81" }' +
-				',{ "ime":"Zucchini lose" , "broj":"84" }' +
-				',{ "ime":"Grapefruit rose Stück" , "broj":"548" }' +
+				',{ "ime":"Birne rot lose" , "broj":"80" , "img":"n" }' +
+				',{ "ime":"Trauben hell kernlos lose" , "broj":"81" , "img":"n" }' +
+				',{ "ime":"Zucchini lose" , "broj":"84" , "img":"n" }' +
+				',{ "ime":"Grapefruit rose Stück" , "broj":"548" , "img":"n" }' +
 
-				',{ "ime":"Lauch/Porree Stück" , "broj":"620" }' +
-				',{ "ime":"Avocado vorgereift" , "broj":"642" }' +
-				',{ "ime":"Kiwi Stück" , "broj":"644" }' +
-				',{ "ime":"Mango" , "broj":"646" }' +
+				',{ "ime":"Lauch/Porree Stück" , "broj":"620" , "img":"n" }' +
+				',{ "ime":"Avocado vorgereift" , "broj":"642" , "img":"n" }' +
+				',{ "ime":"Kiwi Stück" , "broj":"644" , "img":"n" }' +
+				',{ "ime":"Mango" , "broj":"646" , "img":"n" }' +
 
 
-				',{ "ime":"Salat Kopfsalat" , "broj":"666" }' +
-				',{ "ime":"Gurken" , "broj":"683" }' +
-				',{ "ime":"Kohlrabi" , "broj":"725" }' +
-				',{ "ime":"Kartoffeln 4 kg" , "broj":"739" }' +
-				',{ "ime":"Lauchzwiebel" , "broj":"745" }' +
-				',{ "ime":"Radieschen" , "broj":"751" }' +	
+				',{ "ime":"Salat Kopfsalat" , "broj":"666" , "img":"n" }' +
+				',{ "ime":"Gurken" , "broj":"683" , "img":"n" }' +
+				',{ "ime":"Kohlrabi" , "broj":"725" , "img":"n" }' +
+				',{ "ime":"Kartoffeln 4 kg" , "broj":"739" , "img":"n" }' +
+				',{ "ime":"Lauchzwiebel" , "broj":"745" , "img":"n" }' +
+				',{ "ime":"Radieschen" , "broj":"751" , "img":"n" }' +	
 
-				',{ "ime":"Aubergine" , "broj":"852" }' +
-				',{ "ime":"Blumenkohl" , "broj":"883" }' +
-				',{ "ime":"Träger leer ganzer Kasten" , "broj":"2902" }' +
-				',{ "ime":"Baumwolltragetasche" , "broj":"7387" }' +
+				',{ "ime":"Aubergine" , "broj":"852" , "img":"n" }' +
+				',{ "ime":"Blumenkohl" , "broj":"883" , "img":"n" }' +
+				',{ "ime":"Träger leer ganzer Kasten" , "broj":"2902" , "img":"n" }' +
+				',{ "ime":"Baumwolltragetasche" , "broj":"7387" , "img":"n" }' +
 
-				',{ "ime":"Bauerngluck" , "broj":"/" }' +
-				',{ "ime":"Biodinkelgluck" , "broj":"/" }' +
-				',{ "ime":"Biovitales" , "broj":"/" }' +
-				',{ "ime":"Bockergluck" , "broj":"/" }' +
+				',{ "ime":"Bauerngluck" , "broj":"7465" , "img":"y" }' +
+				',{ "ime":"Biodinkelgluck" , "broj":"/" , "img":"y" }' +
+				',{ "ime":"Biovitales" , "broj":"7493" , "img":"y" }' +
+				',{ "ime":"Bäckerglück" , "broj":"7431" , "img":"y" }' +
 
-				',{ "ime":"Dinkelliebe" , "broj":"/" }' +
-				',{ "ime":"Doppelschrippe" , "broj":"/" }' +
-				',{ "ime":"Elsässer" , "broj":"/" }' +
-				',{ "ime":"Großerchamp" , "broj":"/" }' +
+				',{ "ime":"Dinkelliebe" , "broj":"/" , "img":"y" }' +
+				',{ "ime":"Doppelschrippe" , "broj":"7404" , "img":"y" }' +
+				',{ "ime":"Elsässer" , "broj":"7416" , "img":"y" }' +
+				',{ "ime":"Großerchamp" , "broj":"7479" , "img":"y" }' +
 
-				',{ "ime":"Kaisergold" , "broj":"/" }' +
-				',{ "ime":"Knuspersonne" , "broj":"/" }' +
-				',{ "ime":"Kornkäpitan" , "broj":"/" }' +
-				',{ "ime":"Kürbiskerl" , "broj":"/" }' +
+				',{ "ime":"Kaisergold" , "broj":"7" , "img":"y" }' +
+				',{ "ime":"Knuspersonne" , "broj":"7467" , "img":"y" }' +
+				',{ "ime":"Kornkäpitan" , "broj":"7426" , "img":"y" }' +
+				',{ "ime":"Kürbiskerl" , "broj":"7413" , "img":"y" }' +
 
-				',{ "ime":"Meiesterstücke" , "broj":"/" }' +
-				',{ "ime":"Rogenkruste" , "broj":"/" }' +
-				',{ "ime":"Rogenkrusti" , "broj":"/" }' +
-				',{ "ime":"Rosi_s_Liebling" , "broj":"/" }' +
+				',{ "ime":"Meiesterstücke" , "broj":"6" , "img":"y" }' +
+				',{ "ime":"Rogenkruste" , "broj":"7440" , "img":"y" }' +
+				',{ "ime":"Rogenkrusti" , "broj":"7411" , "img":"y" }' +
+				',{ "ime":"Rosi_s_Liebling" , "broj":"7419" , "img":"y" }' +
 
-				',{ "ime":"Toscaninis" , "broj":"/" }' +
-				',{ "ime":"Urgetreidebrot" , "broj":"/" }' +
-				',{ "ime":"Weizenkruste" , "broj":"/" }' +
-				',{ "ime":"Weltmeister" , "broj":"/" }' +
-				',{ "ime":"Xxl_Orientaler" , "broj":"/" }' +
-							
+				',{ "ime":"Toscaninis" , "broj":"7408" , "img":"y" }' +
+				',{ "ime":"Urgetreidebrot" , "broj":"/" , "img":"y" }' +
+				',{ "ime":"Weizenkruste" , "broj":"7477" , "img":"y" }' +
+				',{ "ime":"Weltmeister" , "broj":"7407" , "img":"y" }' +
+				',{ "ime":"Xxl_Orientaler" , "broj":"7499" , "img":"y" }' +
+
+				',{ "ime":"Sesamkringel" , "broj":"7424" , "img":"n" }' +
+				',{ "ime":"Seele" , "broj":"7471" , "img":"n" }' +
+				',{ "ime":"Mohngold" , "broj":"7400" , "img":"n" }' +
+				',{ "ime":"Chiabella" , "broj":"7441" , "img":"n" }' +
+
+				',{ "ime":"Potato" , "broj":"7458" , "img":"n" }' +
+				',{ "ime":"Dinkelsoftie" , "broj":"7426" , "img":"n" }' +
+				',{ "ime":"Powerbrötchen" , "broj":"7423" , "img":"n" }' +
+				',{ "ime":"Käsekrusti" , "broj":"7415" , "img":"n" }' +
+
+				',{ "ime":"Helle Freude" , "broj":"7435" , "img":"n" }' +
+				',{ "ime":"Siegerländer" , "broj":"7480" , "img":"n" }' +
+				',{ "ime":"Flensburger" , "broj":"7453" , "img":"n" }' +
+				',{ "ime":"Netz-brot" , "broj":"7401" , "img":"n" }' +
+
+				',{ "ime":"Malfabrot" , "broj":"7403" , "img":"n" }' +
+				',{ "ime":"Dunkelkorn" , "broj":"7463" , "img":"n" }' +
+				',{ "ime":"Kürbisgold" , "broj":"7439" , "img":"n" }' +
+				',{ "ime":"Rock\'n Rübli" , "broj":"7481" , "img":"n" }' +
+
+				',{ "ime":"Mecklenburger" , "broj":"7430" , "img":"n" }' +
+				',{ "ime":"Paderborner" , "broj":"7438" , "img":"n" }' +
+				',{ "ime":"Odenwälder" , "broj":"7452" , "img":"n" }' +
+				',{ "ime":"Münchener Laibchen" , "broj":"7469" , "img":"n" }' +
+
+				',{ "ime":"Osterfreude" , "broj":"7410" , "img":"n" }' +
+				',{ "ime":"Frankenlaib" , "broj":"7482" , "img":"n" }' +
+				',{ "ime":"Bio-Rogenkrusti" , "broj":"7442" , "img":"n" }' +
+				',{ "ime":"Bayernschleife" , "broj":"7497" , "img":"n" }' +
+
+				',{ "ime":"Goldstück" , "broj":"7449" , "img":"n" }' +
+				',{ "ime":"Nusskarussell" , "broj":"7462" , "img":"n" }' +
+				',{ "ime":"Don Salami" , "broj":"7537" , "img":"n" }' +
+				',{ "ime":"Milka-Daim Donut" , "broj":"7527" , "img":"n" }' +
+
+				',{ "ime":"Sugar Donut" , "broj":"7473" , "img":"n" }' +
+				',{ "ime":"Bio-Korni" , "broj":"7474" , "img":"n" }' +
+				',{ "ime":"Körnerglück" , "broj":"7545" , "img":"n" }' +
+				',{ "ime":"Hefeküsschen" , "broj":"7419" , "img":"n" }' +
+
+				',{ "ime":"Laugengaudi" , "broj":"7483" , "img":"n" }' +
+				',{ "ime":"Nougat Donut" , "broj":"7495" , "img":"n" }' +
+				',{ "ime":"Oreo Donut" , "broj":"7447" , "img":"n" }' +
+				',{ "ime":"Twister Donut" , "broj":"7487" , "img":"n" }' +
+
+				',{ "ime":"Eiffeltürmchen" , "broj":"7433" , "img":"n" }' +
+				',{ "ime":"Heißer Jacques" , "broj":"7434" , "img":"n" }' +
+				',{ "ime":"Würziger Jacques" , "broj":"7472" , "img":"n" }' +
+				',{ "ime":"Laugenbreze" , "broj":"7418" , "img":"n" }' +
+
+				',{ "ime":"Laugenstange" , "broj":"7459" , "img":"n" }' +
+				',{ "ime":"Knabberstange" , "broj":"7485" , "img":"n" }' +
+				',{ "ime":"Choco Donut" , "broj":"7475" , "img":"n" }' +
+				',{ "ime":"Pinky Donut" , "broj":"7464" , "img":"n" }' +
+				
+				',{ "ime":"Butter Cross" , "broj":"7425" , "img":"n" }' +
+				',{ "ime":"Süßer Cross" , "broj":"7422" , "img":"n" }' +
+				',{ "ime":"Leckerschmecker" , "broj":"7427" , "img":"n" }' +
+				',{ "ime":"Apfelwunder" , "broj":"7490" , "img":"n" }' +
+
+				',{ "ime":"Schokoschmecker" , "broj":"7432" , "img":"n" }' +
+				',{ "ime":"Rusti Cross" , "broj":"7421" , "img":"n" }' +
+				',{ "ime":"Würstchen Cross" , "broj":"7489" , "img":"n" }' +
+				',{ "ime":"Currymaxe" , "broj":"7450" , "img":"n" }' +
+
+				',{ "ime":"Orientschnecke" , "broj":"7449" , "img":"n" }' +
+				',{ "ime":"Scharfer Jacques" , "broj":"7448" , "img":"n" }' +
+				',{ "ime":"Cia-Basta" , "broj":"7443" , "img":"n" }' +
+				',{ "ime":"Laugenbrötchen" , "broj":"7456" , "img":"n" }' +
+
+				',{ "ime":"Käsestange" , "broj":"7428" , "img":"n" }' +
+				',{ "ime":"Berliner" , "broj":"7476" , "img":"n" }' +
+				',{ "ime":"Quarkherzchen" , "broj":"7420" , "img":"n" }' +
+				',{ "ime":"Vanillebiene" , "broj":"7498" , "img":"n" }' +
+				
+				',{ "ime":"Unser Franz" , "broj":"7429" , "img":"n" }' +
+				',{ "ime":"Milka Muffin" , "broj":"7412" , "img":"n" }' +
+				',{ "ime":"Vanille Traum" , "broj":"7488" , "img":"n" }' +
+				',{ "ime":"Chicken Döner" , "broj":"7409" , "img":"n" }' +
+				
+				',{ "ime":"Italotasche" , "broj":"7451" , "img":"n" }' +
+				',{ "ime":"Pizza Bianco" , "broj":"7466" , "img":"n" }' +
+				',{ "ime":"Pizza Napoli" , "broj":"7414" , "img":"n" }' +
+				
 				']';
 				
 	var correct = 0;
@@ -277,11 +361,11 @@ html,body{ margin:0; padding-bottom: 10px;
 				//	shouldImage = true;
 				//	selfCounter = 0;
 				//}
-				if(shouldImage && jsonData[numm].broj.includes('/') && auswahl){
+				if(shouldImage && jsonData[numm].img.includes('y') && auswahl){
 					arr.push(numm);
 					imageCounter = 0;
 				}
-				else if(!shouldImage && !jsonData[numm].broj.includes('/') && auswahl){
+				else if(!shouldImage && jsonData[numm].img.includes('n') && auswahl){
 									arr.push(numm);
 				}
 				else if(!auswahl && !jsonData[numm].broj.includes('/')){
